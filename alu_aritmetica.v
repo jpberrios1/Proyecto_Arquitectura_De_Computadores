@@ -1,12 +1,7 @@
-// ============================================================
-// ALU aritmetica de 4 bits (Suma / Resta / Resta inversa)
-// Integra: selector_operacion + inversor x8 + full_adder x4
-//
-// R = A + B          (c2c1c0 = 001)
-// R = A - B          (c2c1c0 = 010)
-// R = B - A          (c2c1c0 = 011)
+// R = A + B => A + B      (c2c1c0 = 001)
+// R = A - B => A + B' + 1 (c2c1c0 = 010)
+// R = B - A => A' + B + 1 (c2c1c0 = 011)
 // (c2c1c0 = 000 es Reinicio, ese caso se maneja fuera de este bloque)
-// ============================================================
 
 module alu_aritmetica (
     input  wire [3:0] A,
@@ -17,16 +12,9 @@ module alu_aritmetica (
     output wire [3:0] R
 );
 
-    // Senales de control que salen del selector de operacion
+    // Salidas del selector de operacion
     wire cin, invA, invB;
 
-    // Operandos ya pasados por el inversor controlado
-    wire [3:0] Ainv, Binv;
-
-    // Carry que se propaga entre bits
-    wire [3:0] carry;
-
-    // ---- Selector de operacion (ya lo tienes hecho) ----
     selector_operacion SEL (
         .c2   (c2),
         .c1   (c1),
@@ -36,14 +24,19 @@ module alu_aritmetica (
         .invB (invB)
     );
 
-    // ================= BIT 0 (ejemplo resuelto) =================
+    // Operandos ya pasados por el inversor
+    wire [3:0] Ainv, Binv;
+
     inversor4Bit invA0 (.Inv(invA), .X(A[3:0]), .S(Ainv[3:0]));
     inversor4Bit invB0 (.Inv(invB), .X(B[3:0]), .S(Binv[3:0]));
+
+    // Carry que se propaga entre bits para los full adder
+    wire [3:0] carry;
 
     full_adder FA0 (
         .A    (Ainv[0]),
         .B    (Binv[0]),
-        .Cin  (cin),        // el primer carry-in viene del selector
+        .Cin  (cin),       
         .S    (R[0]),
         .Cout (carry[0])
     );

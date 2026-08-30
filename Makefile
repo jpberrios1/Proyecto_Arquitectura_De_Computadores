@@ -9,7 +9,7 @@ all: compile run
 
 # Compilar todos los archivos .v en el ejecutable final
 compile $(TARGET): $(SRCS)
-	$(CC) -o $(TARGET) $(SRCS)
+	$(CC) -g2012 -o $(TARGET) $(SRCS)
 
 # Ejecutar la simulación
 run: $(TARGET)

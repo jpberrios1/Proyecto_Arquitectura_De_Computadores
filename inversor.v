@@ -1,16 +1,13 @@
-// ============================================================
-// Inversor controlado
-// Si Inv=0, deja pasar X sin cambios.
-// Si Inv=1, invierte X.
-// (Recuerda: esto es exactamente la definicion de una compuerta XOR)
-//
 // Tabla de verdad:
 // Inv X | S
 //  0  0 | 0
 //  0  1 | 1
 //  1  0 | 1
 //  1  1 | 0
-// ============================================================
+
+
+// Si Inv=0, deja pasar X
+// Si Inv=1, invierte X.
 
 module inversorBit (
     input  wire Inv,

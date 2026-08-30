@@ -1,10 +1,4 @@
-// ============================================================
-// Sumador completo (Full Adder) - 1 bit
-// Este bloque se va a instanciar 4 veces (una por cada bit)
-// para formar el sumador/restador de 4 bits, encadenando
-// el Cout de un bit como Cin del siguiente.
-//
-// Tabla de verdad (del trabajo de tu companera):
+// Tabla de verdad:
 // A B Cin | Cout S
 // 0 0  0  |  0   0
 // 0 0  1  |  0   1
@@ -18,7 +12,6 @@
 // Ecuaciones:
 //   S    = A xor B xor Cin
 //   Cout = A.B + B.Cin + A.Cin
-// ============================================================
 
 module full_adder (
     input  wire A,

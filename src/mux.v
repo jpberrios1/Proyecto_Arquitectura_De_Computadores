@@ -25,38 +25,38 @@ module mux2 (
 endmodule
 
 module mux2_4bit (
-    input  wire Sel_,
-    input  wire [3:0] D0_,
-    input  wire [3:0] D1_,
-    output wire [3:0] Y_
+    input  wire Selector,
+    input  wire [3:0] D0,
+    input  wire [3:0] D1,
+    output wire [3:0] Y
 );
 
     mux2 B0 (
-        .Sel (Sel_),
-        .D0 (D0_[0]),
-        .D1 (D1_[0]),
-        .Y (Y_[0])
+        .Sel (Selector),
+        .D0 (D0[0]),
+        .D1 (D1[0]),
+        .Y (Y[0])
     );
 
     mux2 B1 (
-        .Sel (Sel_),
-        .D0 (D0_[1]),
-        .D1 (D1_[1]),
-        .Y (Y_[1])
+        .Sel (Selector),
+        .D0 (D0[1]),
+        .D1 (D1[1]),
+        .Y (Y[1])
     );
 
     mux2 B2 (
-        .Sel (Sel_),
-        .D0 (D0_[2]),
-        .D1 (D1_[2]),
-        .Y (Y_[2])
+        .Sel (Selector),
+        .D0 (D0[2]),
+        .D1 (D1[2]),
+        .Y (Y[2])
     );
 
     mux2 B3 (
-        .Sel (Sel_),
-        .D0 (D0_[3]),
-        .D1 (D1_[3]),
-        .Y (Y_[3])
+        .Sel (Selector),
+        .D0 (D0[3]),
+        .D1 (D1[3]),
+        .Y (Y[3])
     );
     
 endmodule

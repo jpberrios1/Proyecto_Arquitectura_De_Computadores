@@ -1,24 +1,17 @@
-// ============================================================
-// Selector de Operacion - Calculadora 4 bits
-// Traduce el codigo de operacion (c2 c1 c0) en las senales
-// de control cin, invA e invB para el sumador/restador.
-//
-// Tabla de verdad (del trabajo de tu companera):
-// c2 c1 c0 | cin invA invB   operacion
+// Tabla de verdad:
+// c2 c1 c0 | cin invA invB   
 //  0  0  0 |  0   0    0     Reinicio
 //  0  0  1 |  0   0    0     Suma
 //  0  1  0 |  1   0    1     Resta (A - B)
 //  0  1  1 |  1   1    0     Resta inversa (B - A)
-//  (c2=1 son shifts, no le importan a este bloque -> don't care)
-//
-// Ecuaciones ya simplificadas con Karnaugh:
+
+// Ecuaciones con Karnaugh:
 //   cin  = c1
 //   invA = c1 . c0
 //   invB = c1 . c0'
-// ============================================================
 
-module selector_operacion (
-    input  wire c2,   // no se usa en estas ecuaciones (era don't care)
+
+module selector_operacion_aritmetica (
     input  wire c1,
     input  wire c0,
     output wire cin,

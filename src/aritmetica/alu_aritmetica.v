@@ -6,7 +6,6 @@
 module alu_aritmetica (
     input  wire [3:0] A,
     input  wire [3:0] B,
-    input  wire       c2,
     input  wire       c1,
     input  wire       c0,
     output wire [3:0] R
@@ -15,8 +14,7 @@ module alu_aritmetica (
     // Salidas del selector de operacion
     wire cin, invA, invB;
 
-    selector_operacion SEL (
-        .c2   (c2),
+    selector_operacion_aritmetica SEL (
         .c1   (c1),
         .c0   (c0),
         .cin  (cin),

@@ -27,7 +27,6 @@ module calculadora (
     alu_aritmetica module1 (
         .A (A),
         .B (B),
-        .c2 (c2),
         .c1 (c1),
         .c0 (c0),
         .R (R_arit)

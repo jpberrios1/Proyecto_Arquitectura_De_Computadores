@@ -2,9 +2,8 @@
 CC = iverilog -g2012
 SIMULATOR = vvp
 TARGET = sim.vvp
-WAVEFILE = calculadora.vcd
+WAVEFILE = prueba.vcd
 SRCS = $(shell find src test -name "*.v")
-TB ?= test/tb_calculadora_combinacional.v
 
 all: compile run
 
@@ -15,12 +14,6 @@ compile $(TARGET): $(SRCS)
 # Ejecutar la simulación
 run: $(TARGET)
 	$(SIMULATOR) $(TARGET)
-
-test_calc:
-	@$(MAKE) TB=test/tb_calculadora_combinacional.v
-
-test_shift:
-	@$(MAKE) TB=test/tb_shift_right.v
 
 # Visualizar las ondas en GTKWave sin bloquear la terminal
 wave:

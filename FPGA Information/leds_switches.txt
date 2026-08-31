@@ -1,0 +1,14 @@
+i_Switch_1 = Arriba Izquierda (53)
+i_Switch_2 = Abajo Izquierda (51)
+i_Switch_3 = Arriba Derecha (54)
+i_Switch_4 = Abajo Derecha (52)
+    
+LED1: D1 (56)
+LED2: D2 (57)
+LED3: D3 (59)
+LED4: D4 (60)
+
+(56) (57) (59) (60)
+
+(53) (54)
+(51) (52)

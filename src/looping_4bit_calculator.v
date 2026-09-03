@@ -6,8 +6,8 @@
 module looping_4bit_calculator (
     input  wire        clk,
     input  wire        execute,
-    input  wire [2:0]  code,  //Selector de operacion (bit2, bit1, bit0)
-    input  wire        select_op2, // Determina el tipo de segundo operando
+    input  wire [2:0]  code,         //Selector de operacion (bit2, bit1, bit0)
+    input  wire        select_op2,   // Determina el tipo de segundo operando
     input  wire [3:0]  op1,
     input  wire [3:0]  external_op2, // Segundo operando externo (si select_op2=0)
     output wire [3:0]  answer

@@ -31,13 +31,13 @@ module arithmetic_logic_unit (
     wire [3:0] A_inverted; 
     wire [3:0] B_inverted;
 
-    inversor_4_bit inv_a (
+    inversor_4bit inv_a (
         .invert   (is_A_inverted), 
         .input_X  (A), 
         .output_S (A_inverted)
     );
 
-    inversor_4_bit inv_b (
+    inversor_4bit inv_b (
         .invert   (is_B_inverted), 
         .input_X  (B), 
         .output_S (B_inverted)

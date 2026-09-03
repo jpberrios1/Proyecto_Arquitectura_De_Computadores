@@ -8,7 +8,7 @@ module tb_contador_updown_4bit;
     wire [3:0] Q;
 
     // Instancia del módulo
-    contador_masmenos_4bit DUT (
+    increment_decrement_4bit DUT (
         .clk     (clk),
         .btn_plus (btn_inc),
         .btn_minus (btn_dec),

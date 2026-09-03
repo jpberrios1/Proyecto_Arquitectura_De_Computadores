@@ -5,7 +5,7 @@
 
 // Esto es porque presionar el boton puede durar varios ciclos de reloj, estropeando la logica de la calculadora
 
-module detector_flanco (
+module flank_detector (
     input  wire clk,
     input  wire button,
     output wire pulse

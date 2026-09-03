@@ -13,7 +13,7 @@
 // "invert = 0" -> Salen como entraron
 // "invert = 1" -> Salen invertidos
 
-module inversor_4_bit (
+module inversor_4bit (
     input wire  invert,
     input wire  [3:0] input_X,
     output wire [3:0] output_S

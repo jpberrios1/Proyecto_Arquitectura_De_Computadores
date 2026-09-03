@@ -8,42 +8,42 @@
 // se mantiene igual.
 // ============================================================
 
-module registro_estado (
+module state_register (
     input  wire       clk,
-    input  wire       avanzar,
-    output reg  [1:0] Q
+    input  wire       continue,
+    output reg  [1:0] current_Q
 );
 
-    wire [1:0] estado_siguiente;
+    wire [1:0] next_state;
     wire [1:0] next_Q;
 
     wire notQ0;
-    not n0 (notQ0, Q[0]);
-    buf n1 (estado_siguiente[0], notQ0);
+    not n0 (notQ0, current_Q[0]);
+    buf n1 (next_state[0], notQ0);
 
-    xor n3 (estado_siguiente[1], Q[1], Q[0]);
+    xor n3 (next_state[1], current_Q[1], current_Q[0]);
 
     mux_2_to_1 bit1 (
-        .select (avanzar),
-        .d0 (Q[0]),
-        .d1 (estado_siguiente[0]),
+        .select (continue),
+        .d0 (current_Q[0]),
+        .d1 (next_state[0]),
         .y (next_Q[0])
     );
 
     mux_2_to_1 bit2 (
-        .select (avanzar),
-        .d0 (Q[1]),
-        .d1 (estado_siguiente[1]),
+        .select (continue),
+        .d0 (current_Q[1]),
+        .d1 (next_state[1]),
         .y (next_Q[1])
     );
 
     always @(posedge clk) begin
-        Q <= next_Q;
+        current_Q <= next_Q;
         
     end
 
     initial begin
-        Q = 2'b00;
+        current_Q = 2'b00;
     end
 
 endmodule

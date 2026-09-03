@@ -13,6 +13,10 @@
 //   S    = A xor B xor Cin
 //   Cout = A.B + B.Cin + A.Cin
 
+
+// Modulo que suma 2 bits A y B con un carry de entrada Cin
+// Devuelve la suma S y el carry de salida Cout
+
 module full_adder (
     input  wire A,
     input  wire B,
@@ -21,16 +25,17 @@ module full_adder (
     output wire Cout
 );
 
-    // XOR para la suma que sale (0,1)
+    // Define la Suma
     xor x1 (S, A, B, Cin);
 
-    wire t1, t2, t3;
+    // Define el carry de salida
+    wire w1, w2, w3;
 
-    //ANDS y OR para el carry que sigue para el siguiente digito
-    and a1 (t1, A, B);
-    and a2 (t2, A, Cin);
-    and a3 (t3, B, Cin);
-    or o1 (Cout, t1, t2, t3);
+    and a1 (w1, A, B);
+    and a2 (w2, A, Cin);
+    and a3 (w3, B, Cin);
+
+    or o1 (Cout, w1, w2, w3);
 
 endmodule
 

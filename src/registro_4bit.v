@@ -1,24 +1,23 @@
-// ============================================================
-// Registro de 4 bits con carga condicional (LOAD)
-// En cada flanco de subida de clk:
-//   LOAD=1 -> Q captura el valor de D
-//   LOAD=0 -> Q mantiene su valor actual
+// Registro de 4 bits
+// En cada flanco de subida de clk guarda el valor dependiendo del valor de "load":
+//   load=1 -> "Q" captura el valor de "D"
+//   load=0 -> "Q" mantiene su valor actual
 // ============================================================
 
-module registro_4bit (
+module register_4bit (
     input  wire       clk,
-    input  wire       LOAD,
+    input  wire       load,
     input  wire [3:0] D,
     output reg  [3:0] Q
 );
 
     wire [3:0] next_Q;
 
-    mux2_4bit changes (
-        .Selector (LOAD),
-        .D0 (Q),
-        .D1 (D),
-        .Y (next_Q)
+    mux_2_to_1_4bit mux_change (
+        .select (load),
+        .d0     (Q),
+        .d1     (D),
+        .y      (next_Q)
     );
 
     always @(posedge clk) begin

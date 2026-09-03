@@ -11,29 +11,22 @@
 //   invB = c1 . c0'
 
 
-module selector_operacion_aritmetica (
-    input  wire c1,
-    input  wire c0,
-    output wire cin,
-    output wire invA,
-    output wire invB
+module arithmetic_operation_selector (
+    // bit2 solo decide su usar o no las operaciones aritmeticas
+    input  wire bit1, 
+    input  wire bit0,
+    output wire carry_in,
+    output wire is_A_inverted,
+    output wire is_B_inverted
 );
 
-    // Cable separado que luego se convierte en el inverso
-    // de c0 para obtener invB
-    // Sintaxis: not nombre_instancia (salida, entrada);
-    wire c0_n;
-    not n1 (c0_n, c0);
+    wire bit0_inverted;
+    not n1 (bit0_inverted, bit0);
     
-    // Copia el valor de la entrada c1 a la salida cin (sin modificar)
-    // Sintaxis: buf nombre_instancia (salida, entrada);
-    buf n2 (cin, c1);
+    // Copia el valor de bit1 a la salida carry_in
+    buf n2 (carry_in, bit1);
 
-    // Sintaxis de un AND de 2 entradas:
-    // and nombre_instancia (salida, entrada1, entrada2);
-
-    and n3 (invA, c1, c0); //invA
-
-    and n4 (invB, c1, c0_n); //invB
+    and n3 (is_A_inverted, bit1, bit0);          // Decide si A es numero negativo
+    and n4 (is_B_inverted, bit1, bit0_inverted); // Decide si B es numero negativo
 
 endmodule

@@ -1,49 +1,42 @@
-// ============================================================
-// Calculadora - nucleo combinacional
-// Junta la rama aritmetica y la rama de shifts, y decide
-// cual resultado es el real segun c2:
+// Calculator Logic
+// Junta la rama aritmetica y la rama de shifts, y decide cual resultado es el real segun c2:
 //   c2=0 -> resultado aritmetico (suma / resta / resta inversa)
 //   c2=1 -> resultado de shift (izquierda o derecha)
 //
 // Nota: el caso c2c1c0 = 000 (Reinicio) NO se maneja aqui.
-// Ese caso se resuelve despues, en la "Memoria MUX" que decide
-// entre este resultado R y forzar 0000 antes de guardar en
-// el registro (eso viene en el siguiente paso del proyecto).
-// ============================================================
 
-module calculadora (
+module calculator_logic (
     input  wire [3:0] A,   // op1
     input  wire [3:0] B,   // segundo operando ya elegido (op2 o Rprev)
-    input  wire       c2,
-    input  wire       c1,
-    input  wire       c0,
-    output wire [3:0] R
+    input  wire       bit2,
+    input  wire       bit1,
+    input  wire       bit0,
+    output wire [3:0] o_calculated
 );
 
-    wire [3:0] R_arit, R_shift;
+    wire [3:0] arithmetic_output;
+    wire [3:0] shift_output;
 
-    // TODO: instancia alu_aritmetica
-    //   entradas: A, B, c2, c1, c0  ->  salida: R_arit
-    alu_aritmetica module1 (
-        .A (A),
-        .B (B),
-        .c1 (c1),
-        .c0 (c0),
-        .R (R_arit)
+    arithmetic_logic_unit arithmetic_module (
+        .a    (A),
+        .b    (B),
+        .bit1 (bit1),
+        .bit0 (bit0),
+        .r    (arithmetic_output)
     );
 
-    shifter module2 (
-        .A (A),
-        .S (B[1:0]),
-        .c0 (c0),
-        .R (R_shift)
+    shifter shift_module (
+        .a       (A),
+        .s       (B[1:0]), //Solo necesita los 2 bits menos significativos de B para el shift
+        .bit0    (bit0),
+        .o_shift (shift_output)
     );
 
-    mux2_4bit module12 (
-        .Selector (c2),
-        .D0 (R_arit),
-        .D1 (R_shift),
-        .Y (R)
+    mux_2_to_1_4bit mux_arith_shift (
+        .select (bit2),
+        .d0     (arithmetic_output),
+        .d1     (shift_output),
+        .y      (o_calculated)
     );
 
 endmodule

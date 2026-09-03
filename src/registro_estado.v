@@ -23,18 +23,18 @@ module registro_estado (
 
     xor n3 (estado_siguiente[1], Q[1], Q[0]);
 
-    mux2 bit1 (
-        .Sel (avanzar),
-        .D0 (Q[0]),
-        .D1 (estado_siguiente[0]),
-        .Y (next_Q[0])
+    mux_2_to_1 bit1 (
+        .select (avanzar),
+        .d0 (Q[0]),
+        .d1 (estado_siguiente[0]),
+        .y (next_Q[0])
     );
 
-    mux2 bit2 (
-        .Sel (avanzar),
-        .D0 (Q[1]),
-        .D1 (estado_siguiente[1]),
-        .Y (next_Q[1])
+    mux_2_to_1 bit2 (
+        .select (avanzar),
+        .d0 (Q[1]),
+        .d1 (estado_siguiente[1]),
+        .y (next_Q[1])
     );
 
     always @(posedge clk) begin

@@ -44,22 +44,22 @@ module contador_masmenos_4bit (
     wire [3:0] next_Q;
     wire needsChange;
 
-    mux2_4bit calculate (
-        .Selector (btn_minus),
-        .D0 (plus_val),
-        .D1 (minus_val),
-        .Y (calculated_Q)
+    mux_2_to_1_4bit calculate (
+        .select (btn_minus),
+        .d0 (plus_val),
+        .d1 (minus_val),
+        .y (calculated_Q)
     );
 
     // Check if either buttons have been pressed to affect change
 
     or check (needsChange, btn_plus, btn_minus);
 
-    mux2_4bit load (
-        .Selector (needsChange),
-        .D0 (Q),
-        .D1 (calculated_Q),
-        .Y (next_Q)
+    mux_2_to_1_4bit load (
+        .select (needsChange),
+        .d0 (Q),
+        .d1 (calculated_Q),
+        .y (next_Q)
     );
 
     always @(posedge clk) begin

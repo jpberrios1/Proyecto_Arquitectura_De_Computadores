@@ -9,34 +9,15 @@ module increment_decrement_4bit (
     wire [3:0] plus_val;
     wire [3:0] minus_val;
 
-    // Increment +1 logic
-    not plus0 (plus_val[0], r_Q[0]);
-    xor plus1 (plus_val[1], r_Q[1], r_Q[0]);
+    increment_4bit incrementer (
+        .current_value (r_Q),
+        .incremented_value (plus_val)
+    );
 
-    wire q0q1;
-    and n0 (q0q1, r_Q[1], r_Q[0]);
-    xor plus2 (plus_val[2], r_Q[2], q0q1);
-
-    wire q0q1q2;
-    and n1 (q0q1q2, q0q1, r_Q[2]);
-    xor plus3 (plus_val[3], r_Q[3], q0q1q2);
-
-    // Increment -1 logic
-    wire notQ0, notQ1, notQ2;
-    not q0 (notQ0, r_Q[0]);
-    not q1 (notQ1, r_Q[1]);
-    not q2 (notQ2, r_Q[2]);
-
-    buf minus0 (minus_val[0], notQ0);
-    xor minus1 (minus_val[1], r_Q[1], notQ0);
-
-    wire nq0nq1;
-    and n2 (nq0nq1, notQ0, notQ1);
-    xor minus2 (minus_val[2], r_Q[2], nq0nq1);
-
-    wire nq0nq1nq2;
-    and n3 (nq0nq1nq2, notQ2, nq0nq1);
-    xor minus3 (minus_val[3], r_Q[3], nq0nq1nq2);
+    decrement_4bit decrementer (
+        .current_value (r_Q),
+        .decremented_value (minus_val)
+    );
 
     //Decide if increment or decrement is the value to store on calculated_Q
 

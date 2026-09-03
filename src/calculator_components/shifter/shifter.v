@@ -18,13 +18,13 @@ module shifter (
     shift_left sl (
         .a (A),
         .s (S),
-        .o_r (shiftl_output)
+        .r (shiftl_output)
     );
 
     shift_right sr (
         .a (A),
         .s (S),
-        .o_r (shiftr_output)
+        .r (shiftr_output)
     );
 
     mux_2_to_1_4bit choose_shift (

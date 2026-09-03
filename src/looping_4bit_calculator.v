@@ -27,13 +27,13 @@ module looping_4bit_calculator (
     );
 
     // Nucleo combinacional (ALU + shifter)
-    calculator_logic alu_shifter (
-        .A  (op1),
-        .B  (op2),
-        .c2 (code[2]),
-        .c1 (code[1]),
-        .c0 (code[0]),
-        .R  (calculated_result)
+    shift_arithmetic_selector select_alu_or_shifter (
+        .A            (op1),
+        .B            (op2),
+        .bit2         (code[2]),
+        .bit1         (code[1]),
+        .bit0         (code[0]),
+        .o_calculated (calculated_result)
     );
 
     // Deteccion de codigo == 000 (Reinicio), armada con compuertas

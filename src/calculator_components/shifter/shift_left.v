@@ -5,7 +5,7 @@
 module shift_left (
     input  wire [3:0] a,
     input  wire [1:0] s, 
-    output wire [3:0] o_r
+    output wire [3:0] r
 );
 
     mux_4_to_1 mux_bit0 (
@@ -14,7 +14,7 @@ module shift_left (
         .bit1  (1'b0),
         .bit2  (1'b0),
         .bit3  (1'b0),
-        .o_bit (o_r[0])
+        .o_bit (r[0])
     );
 
    mux_4_to_1 mux_bit1 (
@@ -23,7 +23,7 @@ module shift_left (
         .bit1  (a[0]),
         .bit2  (1'b0),
         .bit3  (1'b0),
-        .o_bit (o_r[1])
+        .o_bit (r[1])
     );
 
     mux_4_to_1 mux_bit2 (
@@ -32,7 +32,7 @@ module shift_left (
         .bit1  (a[1]),
         .bit2  (a[0]),
         .bit3  (1'b0),
-        .o_bit (o_r[2])
+        .o_bit (r[2])
     );
 
     mux_4_to_1 mux_bit3 (
@@ -41,7 +41,7 @@ module shift_left (
         .bit1  (a[2]),
         .bit2  (a[1]),
         .bit3  (a[0]),
-        .o_bit (o_r[3])
+        .o_bit (r[3])
     );
 
 endmodule

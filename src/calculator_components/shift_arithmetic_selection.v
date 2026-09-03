@@ -5,7 +5,7 @@
 //
 // Nota: el caso c2c1c0 = 000 (Reinicio) NO se maneja aqui.
 
-module calculator_logic (
+module shift_arithmetic_selector (
     input  wire [3:0] A,   // op1
     input  wire [3:0] B,   // segundo operando ya elegido (op2 o Rprev)
     input  wire       bit2,
@@ -18,16 +18,16 @@ module calculator_logic (
     wire [3:0] shift_output;
 
     arithmetic_logic_unit arithmetic_module (
-        .a    (A),
-        .b    (B),
+        .A    (A),
+        .B    (B),
         .bit1 (bit1),
         .bit0 (bit0),
-        .r    (arithmetic_output)
+        .R    (arithmetic_output)
     );
 
     shifter shift_module (
-        .a       (A),
-        .s       (B[1:0]), //Solo necesita los 2 bits menos significativos de B para el shift
+        .A       (A),
+        .S       (B[1:0]), //Solo necesita los 2 bits menos significativos de B para el shift
         .bit0    (bit0),
         .o_shift (shift_output)
     );

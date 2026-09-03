@@ -44,38 +44,11 @@ module arithmetic_logic_unit (
     );
 
     // Carry que se propaga entre bits para los full adder
-    wire [3:0] full_carry;
-
-    full_adder adder0 (
-        .A    (A_inverted[0]),
-        .B    (B_inverted[0]),
-        .Cin  (carry_in),
-        .S    (R[0]),
-        .Cout (full_carry[0])
-    );
-
-    full_adder adder1 (
-        .A    (A_inverted[1]),
-        .B    (B_inverted[1]),
-        .Cin  (full_carry[0]),
-        .S    (R[1]),
-        .Cout (full_carry[1])
-    );
-
-    full_adder adder2 (
-        .A    (A_inverted[2]),
-        .B    (B_inverted[2]),
-        .Cin  (full_carry[1]),
-        .S    (R[2]),
-        .Cout (full_carry[2])
-    );
-
-    full_adder adder3 (
-        .A    (A_inverted[3]),
-        .B    (B_inverted[3]),
-        .Cin  (full_carry[2]),
-        .S    (R[3]),
-        .Cout () // No necesitamnos el carry de salida final, sobrepasa los 4 bits
+    full_adder_4bit add_A_and_B(
+        .carry_in (carry_in),
+        .A (A_inverted),
+        .B (B_inverted),
+        .S (R)
     );
 
 endmodule

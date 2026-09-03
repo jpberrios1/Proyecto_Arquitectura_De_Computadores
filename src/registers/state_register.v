@@ -10,7 +10,7 @@
 
 module state_register (
     input  wire       clk,
-    input  wire       continue,
+    input  wire       advance,
     output reg  [1:0] current_Q
 );
 
@@ -24,14 +24,14 @@ module state_register (
     xor n3 (next_state[1], current_Q[1], current_Q[0]);
 
     mux_2_to_1 bit1 (
-        .select (continue),
+        .select (advance),
         .d0 (current_Q[0]),
         .d1 (next_state[0]),
         .y (next_Q[0])
     );
 
     mux_2_to_1 bit2 (
-        .select (continue),
+        .select (advance),
         .d0 (current_Q[1]),
         .d1 (next_state[1]),
         .y (next_Q[1])
@@ -47,3 +47,4 @@ module state_register (
     end
 
 endmodule
+

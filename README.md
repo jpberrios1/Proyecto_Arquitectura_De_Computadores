@@ -10,7 +10,7 @@ Arquitectura de Computadores - Universidad de los Andes (2026-2).
 
 ## El Programa
 
-Este repositorio tiene todos los componentes necesarios para implementar una calculadora de 4 bits en complemento a 2 (numero del -8 al 7) para una FPGA Lattice iCE40HX1K (Nandland Go Board). La logica combinacional de esta se realizo exclusivamente con compuertas lógicas (`and`, `or`, `not`, `xor`, `nand`, `nor`, `xnor`, `buf`) y se evito el uso de funciones de mayor nivel en modulos secuenciales.
+Este repositorio tiene todos los componentes necesarios para implementar una calculadora de 4 bits en complemento a 2 (numeros del -8 al 7) para una FPGA Lattice iCE40HX1K (Nandland Go Board). La logica combinacional de esta se realizo exclusivamente con compuertas lógicas (`and`, `or`, `not`, `xor`, `nor`, `xnor`, `buf`) y se evito el uso de funciones de mayor nivel en modulos secuenciales.
 
 ## Uso en la FPGA (secuencia de botones)
 
@@ -26,7 +26,7 @@ Este repositorio tiene todos los componentes necesarios para implementar una cal
 1. Aumentar o disminuir el codigo de la operacion a realizar visualizado por 3 LEDS
 2. Aumentar o disminuir el primer operando
 3. Decidir el segundo operando con el boton inferior-derecho con las siguientes opciones:
-    - Usar operando nuevo, capas de aumentar y disminuir su valor
+    - Usar operando nuevo, capaz de aumentar y disminuir su valor
     - Usar resultado de operacion anterior
 
     El boton funciona como un interruptor de uso que se reinicia cada ves que se entra a esta etapa y en el display se muestra que numero se utilizara.
@@ -39,7 +39,7 @@ Este repositorio tiene todos los componentes necesarios para implementar una cal
 
 - Los contadores de cada etapa (operacion, primer operando y segundo operando) no se reinician entre operaciones
 
-- Los numero van desde el -8 al 7 ciclando entre si si se fuera a entregar un numero mas grande
+- Los numeros van desde el -8 al 7 ciclando entre si si se fuera a entregar un numero mas grande
 
 ## Operaciones soportadas
 
@@ -90,7 +90,6 @@ src/                              // Carpeta con archivos de la aplicacion
    |- top.v                          
 ---- 
 
-TESTBENCH FOLDER
 test/                             // Carpeta con archivos de TestBench
     |- tb_fsm_controller_completo.v  
 ----
@@ -101,7 +100,7 @@ Makefile                          // Archivo de Compilacion
 
 ## Prerequisitos
 
-Para poder correr simnulaciones, compilar el codigo o actualizar la placa FPGA segun las especificaciones de este repositorio se necesitan las siguientes herramientas
+Para poder correr simulaciones, compilar el codigo o actualizar la placa FPGA segun las especificaciones de este repositorio se necesitan las siguientes herramientas
 
 ### Open-source FPGA Toolchain
 
@@ -113,7 +112,7 @@ Para poder correr simnulaciones, compilar el codigo o actualizar la placa FPGA s
 
 ### Compilacion y conexion
 
-- [GNU Make](https://www-geeksforgeeks-org.translate.goog/installation-guide/how-to-install-make-on-ubuntu/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc&_x_tr_hist=true) (Seguir otra gui de instalacion si no corresponde al sistema)
+- [GNU Make](https://www-geeksforgeeks-org.translate.goog/installation-guide/how-to-install-make-on-ubuntu/?_x_tr_sl=en&_x_tr_tl=es&_x_tr_hl=es&_x_tr_pto=tc&_x_tr_hist=true) (Seguir otra guia de instalacion si no corresponde al sistema)
 - [usbipd-win](https://learn.microsoft.com/es-es/windows/wsl/connect-usb) (Solo para sistemas Windows con WSL)
 
 ## Cómo correr la simulación (Icarus Verilog + GTKWave)

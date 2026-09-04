@@ -1,12 +1,33 @@
-# Constraints oficiales de la Nandland Go Board (iCE40HX1K, VQ100)
-# Solo incluyo los pines que usa este proyecto de prueba.
+# Constraints completos para go_board_top (iCE40HX1K, VQ100)
 
-set_io i_Switch_1 53 //
+# --- Reloj integrado (25 MHz) ---
+set_io clk 15
+
+# --- Switches (botones) ---
+set_io i_Switch_1 53
 set_io i_Switch_2 51
 set_io i_Switch_3 54
 set_io i_Switch_4 52
 
+# --- LEDs (solo usamos 3 de los 4) ---
 set_io o_LED_1 56
 set_io o_LED_2 57
 set_io o_LED_3 59
-set_io o_LED_4 60
+
+# --- Display 1 (izquierdo, muestra el signo) ---
+set_io o_Seg1_A 3
+set_io o_Seg1_B 4
+set_io o_Seg1_C 93
+set_io o_Seg1_D 91
+set_io o_Seg1_E 90
+set_io o_Seg1_F 1
+set_io o_Seg1_G 2
+
+# --- Display 2 (derecho, muestra la magnitud) ---
+set_io o_Seg2_A 100
+set_io o_Seg2_B 99
+set_io o_Seg2_C 97
+set_io o_Seg2_D 95
+set_io o_Seg2_E 94
+set_io o_Seg2_F 8
+set_io o_Seg2_G 96

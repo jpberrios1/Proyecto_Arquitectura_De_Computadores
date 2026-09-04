@@ -17,7 +17,12 @@ module fsm_controller (
     input  wire       dec_btn,
     input  wire       confirm_btn,
     input  wire       useprev_btn,
-    output wire [3:0] result
+    output wire [3:0] result,
+    output wire [1:0] current_state,   
+    output wire [3:0] op1_val,         
+    output wire [3:0] op2_val,         
+    output wire [3:0] code,
+    output wire       select_op2
 );
 
     // ---- Paso 1: detectar flancos de los 4 botones ----
@@ -52,7 +57,6 @@ module fsm_controller (
 
 
     // ---- Paso 2: registro de estado ----
-    wire [1:0] current_state;
     state_register state (
         .clk       (clk),
         .advance   (confirm_pulse),
@@ -91,10 +95,6 @@ module fsm_controller (
 
 
     // ---- Paso 5: los 3 contadores ----
-    wire [3:0] code;  // usa solo codigo_full[2:0] afuera
-    wire [3:0] op1_val;
-    wire [3:0] op2_val;
-
     increment_decrement_4bit codigo_counter (
         .clk       (clk),
         .btn_plus  (inc_code),
@@ -117,20 +117,28 @@ module fsm_controller (
     );
 
     // ---- Paso 6: flag select_op2 (set/reset) ----
-    wire select_op2;
-    wire set_select_op2;
-    wire load_select_op2;
-    wire reset_select_op2;
+    wire toggle_select_op2, reset_select_op2, load_select_op2;
+    wire not_select_op2, d_select_op2;
 
-    and u_set_select_to1 (set_select_op2, useprev_pulse, is_op2_state);
-    and u_reset_select_to0 (reset_select_op2, confirm_pulse, is_op1_state);
+    and u_toggle_select (toggle_select_op2, useprev_pulse, is_op2_state);
+    and u_reset_select   (reset_select_op2, confirm_pulse, is_op1_state);
+    or  u_load_select    (load_select_op2, toggle_select_op2, reset_select_op2);
 
-    or u_load_select_op2 (load_select_op2, set_select_op2, reset_select_op2);
+    not u_not_select (not_select_op2, select_op2);
+
+    // si estamos reseteando (entrando a op2), el valor a escribir es 0;
+    // si no (o sea, es un toggle real), el valor a escribir es el flag invertido
+    mux_2_to_1 u_d_select (
+        .select (reset_select_op2),
+        .d0     (not_select_op2),
+        .d1     (1'b0),
+        .y      (d_select_op2)
+    );
 
     register_1bit select_op2_register (
         .clk  (clk),
         .load (load_select_op2),
-        .D    (set_select_op2),
+        .D    (d_select_op2),
         .Q    (select_op2)
     );
 
